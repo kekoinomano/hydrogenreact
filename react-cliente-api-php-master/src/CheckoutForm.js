@@ -1,52 +1,53 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {loadStripe} from '@stripe/stripe-js';
-import {CardElement, Elements, ElementsConsumer} from '@stripe/react-stripe-js';
-import { Link, withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+//import "./App.css";
 
-class CheckoutForm extends React.Component {
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    const {stripe, elements} = this.props;
+const ProductDisplay = () => (
+  <section>
+    <div className="product">
+      <img
+        src="https://i.imgur.com/EHyR2nP.png"
+        alt="The cover of Stubborn Attachments"
+      />
+      <div className="description">
+      <h3>Stubborn Attachments</h3>
+      <h5>$20.00</h5>
+      </div>
+    </div>
+    <form action="http://localhost/stripe/create-checkout-session.php" method="POST">
+      <button type="submit">
+        Checkout
+      </button>
+    </form>
+  </section>
+);
 
-    if (elements == null) {
-      return;
+const Message = ({ message }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
+
+export default function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
     }
 
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elements.getElement(CardElement),
-    });
-  };
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
 
-  render() {
-    const {stripe} = this.props;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <CardElement />
-        <button type="submit" disabled={!stripe}>
-          Pay
-        </button>
-      </form>
-    );
-  }
+  return message ? (
+    <Message message={message} />
+  ) : (
+    <ProductDisplay />
+  );
 }
-export default withRouter(CheckoutForm);
-/*
-const InjectedCheckoutForm = () => (
-  <ElementsConsumer>
-    {({stripe, elements}) => (
-      <CheckoutForm stripe={stripe} elements={elements} />
-    )}
-  </ElementsConsumer>
-);
-
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
-
-const App = () => (
-  <Elements stripe={stripePromise}>
-    <InjectedCheckoutForm />
-  </Elements>
-);
-*/
-//ReactDOM.render(<App />, document.body);

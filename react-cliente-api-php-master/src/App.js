@@ -20,23 +20,21 @@ function App() {
       <div className="section">
         <div className="columns">
           <Switch>
-
-            <Route path="/videojuegos/agregar">
+            
+            <Route exact path="/videojuegos/agregar">
 
               <AgregarVideojuego></AgregarVideojuego>
             </Route>
-            <Route path="/videojuegos/editar/:id">
+            <Route exact path="/videojuegos/editar/:id">
               <EditarVideojuego></EditarVideojuego>
             </Route>
-            <Route path="/videojuegos/ver">
+            <Route exact path="/videojuegos/ver">
               <VerVideojuegos></VerVideojuegos>
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <VerVideojuegos></VerVideojuegos>
             </Route>
-            <Route component={hola} exact path="/pagar">
-                
-            </Route>
+            <Route component={hola} exact path="/pagar" />
           </Switch>
           <Link to="/pagar">Pagar</Link>
           
