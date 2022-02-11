@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "./static/css/main.afd7172b.chunk.css",
+    "main.js": "./static/js/main.29099441.chunk.js",
+    "main.js.map": "./static/js/main.29099441.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.e59d173c.js",
+    "runtime-main.js.map": "./static/js/runtime-main.e59d173c.js.map",
+    "static/css/2.09d4ddc2.chunk.css": "./static/css/2.09d4ddc2.chunk.css",
+    "static/js/2.3b572bbd.chunk.js": "./static/js/2.3b572bbd.chunk.js",
+    "static/js/2.3b572bbd.chunk.js.map": "./static/js/2.3b572bbd.chunk.js.map",
+    "static/js/3.81ae870a.chunk.js": "./static/js/3.81ae870a.chunk.js",
+    "static/js/3.81ae870a.chunk.js.map": "./static/js/3.81ae870a.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.09d4ddc2.chunk.css.map": "./static/css/2.09d4ddc2.chunk.css.map",
+    "static/css/main.afd7172b.chunk.css.map": "./static/css/main.afd7172b.chunk.css.map",
+    "static/js/2.3b572bbd.chunk.js.LICENSE.txt": "./static/js/2.3b572bbd.chunk.js.LICENSE.txt",
+    "static/media/parzibyte_logo.50131183.png": "./static/media/parzibyte_logo.50131183.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e59d173c.js",
+    "static/css/2.09d4ddc2.chunk.css",
+    "static/js/2.3b572bbd.chunk.js",
+    "static/css/main.afd7172b.chunk.css",
+    "static/js/main.29099441.chunk.js"
+  ]
+}
