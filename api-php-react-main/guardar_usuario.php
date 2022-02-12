@@ -27,10 +27,41 @@ También tengo canal de YouTube: https://www.youtube.com/channel/UCroP4BTWjfM0Ck
 ------------------------------------------------------------------------------------------------
 */ ?>
 <?php
+
+
 include_once "cors.php";
+
+if(isset($_POST)){
+        $nombre=$_POST;
+}else{
+        $nombre="no";
+}
+
+
 $usuario = json_decode(file_get_contents("php://input"));
 
-include_once "funciones.php";
-$resultado = guardarUsuario($usuario);
 
-echo json_encode($resultado);
+
+include_once "funciones.php";
+$bd = obtenerConexion();
+$sentencia = $bd->prepare("INSERT INTO users(username, email, password) VALUES (?, ?, ?)");
+$resultado=$sentencia->execute([$usuario->nombre, $usuario->email, _password_hash($usuario->password)]);
+$respuesta=new stdClass();
+$respuesta->nombre=$nombre;
+if($resultado){
+        $respuesta->exito=true;
+}else{
+        $respuesta->exito=false;
+}
+/*
+$resultado= new stdClass();
+$resultado->error=true;
+if($sentencia){
+        $resultado->error=false;
+}else{
+        $resultado->error=true;
+}
+*/
+//$resultado = guardarUsuario($usuario);
+
+echo json_encode($respuesta);

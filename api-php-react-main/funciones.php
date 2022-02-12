@@ -51,6 +51,16 @@ function guardarUsuario($usuario)
 function _password_hash($password) {
     return password_hash($password, PASSWORD_DEFAULT);
 }
+/**
+ * is_ajax
+ * 
+ * @return void
+ */
+function is_ajax() {
+    if( !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || ($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') ) {
+        redirect();
+    }
+}
 function obtenerVariableDelEntorno($key)
 {
     if (defined("_ENV_CACHE")) {
