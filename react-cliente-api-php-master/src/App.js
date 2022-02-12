@@ -2,7 +2,9 @@ import Nav from "./Nav";
 import AgregarVideojuego from "./AgregarVideojuego";
 import VerVideojuegos from "./VerVideojuegos";
 import EditarVideojuego from "./EditarVideojuego";
-import CheckoutForm from "./CheckoutForm";
+import Agregarusuario from "./register";
+import Hola from "./CheckoutForm";
+
 
 import {
   Switch,
@@ -20,7 +22,9 @@ function App() {
       <div className="section">
         <div className="columns">
           <Switch>
-            
+          <Route exact path="/usuarios/agregar">
+              <Agregarusuario></Agregarusuario>
+            </Route>
             <Route exact path="/videojuegos/agregar">
 
               <AgregarVideojuego></AgregarVideojuego>
@@ -31,23 +35,17 @@ function App() {
             <Route exact path="/videojuegos/ver">
               <VerVideojuegos></VerVideojuegos>
             </Route>
+
             <Route exact path="/">
               <VerVideojuegos></VerVideojuegos>
             </Route>
-            <Route component={hola} exact path="/pagar" />
+            <Route component={Hola} exact path="/pagar" />
           </Switch>
-          <Link to="/pagar">Pagar</Link>
           
-
         </div>
       </div>
     </div>
   );
 }
-const hola=()=>{
-  return(
-    
-    <div>hola{console.log("hola")}</div>
-  )
-}
+
 export default App;

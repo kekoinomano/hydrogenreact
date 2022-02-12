@@ -36,7 +36,21 @@ function guardarVideojuego($videojuego)
     $sentencia = $bd->prepare("INSERT INTO videojuegos(nombre, precio, calificacion) VALUES (?, ?, ?)");
     return $sentencia->execute([$videojuego->nombre, $videojuego->precio, $videojuego->calificacion]);
 }
-
+function guardarUsuario($usuario)
+{
+    $bd = obtenerConexion();
+    $sentencia = $bd->prepare("INSERT INTO users(username, email, password) VALUES (?, ?, ?)");
+    return $sentencia->execute([$usuario->nombre, $usuario->email, _password_hash($usuario->password)]);
+}
+/**
+ * _password_hash
+ * 
+ * @param string $password
+ * @return string
+ */
+function _password_hash($password) {
+    return password_hash($password, PASSWORD_DEFAULT);
+}
 function obtenerVariableDelEntorno($key)
 {
     if (defined("_ENV_CACHE")) {
