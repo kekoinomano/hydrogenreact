@@ -7,7 +7,7 @@ const Home = () => {
       <div className='portada'>
         <div className='flex-item'>
           <div className='rec'></div>
-          <a>El hydriogeno</a>
+          <Link to ='/'>El hydriogeno</Link>
           <br />
           <p>En tu casa y en la Mia easy</p>
         </div>

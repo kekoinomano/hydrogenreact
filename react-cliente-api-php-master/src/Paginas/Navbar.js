@@ -7,9 +7,7 @@ const Navbar = () => {
   return (
     <header className='site-header'>
       <div className='wrapper site-header__wrapper'>
-        <a className='brand'>
-          <Link to='/'>Hydrogeno baby</Link>
-        </a>
+          <Link to='/'className='brand'>Hydrogeno baby</Link>
         <nav className='nav'>
           <button className='nav__toggle' aria-expanded='false' type='button'>
             menu
