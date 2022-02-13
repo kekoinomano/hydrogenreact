@@ -11,6 +11,7 @@ const Login = () => {
     password: '',
     password2: '',
   });
+  const elerror=useState("");
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,8 +26,14 @@ const Login = () => {
     await axios
       .post(`${Constantes.RUTA_API}/guardar_usuario.php`, body)
       .then(function (response) {
-          alert(JSON.stringify(response.data.exito));
+          alert(JSON.stringify(response.data.error));
+          elerror= response.data.error;
       });
+  };
+  const Diverror = ({elerror}) => {
+    return (
+    <div>{elerror}</div>
+    );
   };
 
   return (
@@ -41,7 +48,7 @@ const Login = () => {
           <input
             autoFocus
             required
-            placeholder='Nombre'
+            placeholder='Username'
             type='text'
             id='nombre'
             name='username'
@@ -55,7 +62,7 @@ const Login = () => {
           </label>
           <input
             required
-            placeholder='Precio'
+            placeholder='Email'
             type='text'
             id='email'
             name='email'
@@ -69,7 +76,7 @@ const Login = () => {
           </label>
           <input
             required
-            placeholder='Calificación'
+            placeholder='Password'
             type='password'
             id='password'
             name='password'
@@ -83,7 +90,7 @@ const Login = () => {
           </label>
           <input
             required
-            placeholder='Calificación'
+            placeholder='Repeat password'
             type='password'
             id='password2'
             name='password2'
@@ -91,16 +98,19 @@ const Login = () => {
             className='input'
           />
         </div>
+        <Diverror />
 
         <input
           type='submit'
           className='btn btn-primary'
           value='Iniciar sesión'
-          style={{ marginTop: 20, marginLeft: '32%' }}
+          style={{ marginTop: 20}}
         />
       </form>
     </div>
   );
+  
+  
 };
 
 export default Login;

@@ -53,6 +53,7 @@ if($resultado){
 }else{
         $respuesta->exito=false;
 }
+$respuesta->error="Passwords are not equal";
 /*
 $resultado= new stdClass();
 $resultado->error=true;
