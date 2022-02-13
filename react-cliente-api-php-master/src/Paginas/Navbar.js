@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [datos, setDatos] = useState([]);
+  const [logged, setLog] = useState(false);
 
   return (
     <header className='site-header'>
       <div className='wrapper site-header__wrapper'>
-          <Link to='/'className='brand'>Hydrogeno baby</Link>
+        <Link to='/' className='brand'>
+          Hydrogeno baby
+        </Link>
         <nav className='nav'>
           <button className='nav__toggle' aria-expanded='false' type='button'>
             menu
@@ -20,8 +22,9 @@ const Navbar = () => {
               <Link to='/Comercio'>Comercio</Link>
             </li>
             <li className='nav__item'>
-              <Link to='/Login'>About us</Link>
+              <p onClick={() => setLog(!logged)}>About=???</p>
             </li>
+
             <li className='nav__item' style={{ marginLeft: 100 }}>
               <Link
                 to='/Login'
@@ -31,7 +34,7 @@ const Navbar = () => {
                   color: 'white',
                 }}
               >
-                Login
+                {logged ? 'Log Out' : 'Log in'}
               </Link>
             </li>
           </ul>
