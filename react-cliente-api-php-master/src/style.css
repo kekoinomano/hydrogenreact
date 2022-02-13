@@ -1,0 +1,126 @@
+.cartas {
+  background-color: #e9e9e9;
+  height: 250px;
+  width: 200px;
+  margin: 20px;
+  display: inline-block;
+}
+
+/* &/////////////////////////////// GENERAL /////////////////////////////// */
+.espacioNav {
+  padding-top: 92px;
+}
+/*///////////////////////////////// NAVBAR /////////////////////////////////*/
+
+.brand {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.site-header {
+  position: fixed;
+  width: 100%;
+  background-color: #ffffff;
+}
+.site-header a {
+  color: black;
+}
+
+.site-header__wrapper {
+  margin: 10px 0 10px 0;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+@media (min-width: 600px) {
+  .site-header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+@media (min-width: 600px) {
+  .nav__wrapper {
+    display: flex;
+  }
+}
+
+@media (max-width: 599px) {
+  .nav__wrapper {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #d9f0f7;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  }
+  .nav__wrapper.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav__item {
+  display: block;
+  padding: 1.5rem 1rem;
+}
+
+.nav__toggle {
+  display: none;
+}
+@media (max-width: 599px) {
+  .nav__toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+}
+
+/* /////////////////////////////   Hompage ///////////////////////////////////// */
+
+.portada {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+  height: 500px;
+  padding: 30px;
+}
+
+.flex-item:nth-child(1) {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+}
+
+.flex-item:nth-child(2) {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  background-color: rgb(206, 206, 206);
+  padding: 5%;
+  height: 200px;
+  width: 800px;
+}
+.flex-item p {
+  font-size: 70px;
+  color: black;
+  font-weight: 700;
+}
+.flex-item a {
+  font-size: 70px;
+  color: black;
+  font-weight: 700;
+  background-color: #56d62a;
+  color: #ffffff;
+  padding: 10px;
+}
