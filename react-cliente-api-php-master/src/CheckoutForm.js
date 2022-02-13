@@ -13,7 +13,7 @@ const ProductDisplay = () => (
       <h5>$20.00</h5>
       </div>
     </div>
-    <form action="http://localhost/stripe/create-checkout-session.php" method="POST">
+    <form action="http://localhost/phpreact/api-php-react-main/create-checkout-session.php" method="POST">
       <button type="submit">
         Checkout
       </button>

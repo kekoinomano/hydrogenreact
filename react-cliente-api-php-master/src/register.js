@@ -89,7 +89,7 @@ class Agregarusuario extends React.Component {
             body: cargaUtil,
         });
         const exitoso = await respuesta.json();
-        if (exitoso) {
+        if (exitoso.exito) {
             console.log(exitoso);
             toast('usuario guardado 🎮', {
                 position: "top-left",
