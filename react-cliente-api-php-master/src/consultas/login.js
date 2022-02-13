@@ -6,9 +6,9 @@ export const Registrar = (body) => {
     axios
       .post(`${Constantes.RUTA_API}/guardar_usuario.php`, body)
       .then(function (response) {
-        if (response.data !== 'empty') {
-          alert(JSON.stringify(response));
-        }
+        console.log(response);
       });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };

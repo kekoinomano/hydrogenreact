@@ -45,7 +45,7 @@ $usuario = json_decode(file_get_contents("php://input"));
 include_once "funciones.php";
 $bd = obtenerConexion();
 $sentencia = $bd->prepare("INSERT INTO users(username, email, password) VALUES (?, ?, ?)");
-$resultado=$sentencia->execute([$usuario->nombre, $usuario->email, _password_hash($usuario->password)]);
+$resultado=$sentencia->execute([$usuario->username, $usuario->email, _password_hash($usuario->password)]);
 $respuesta=new stdClass();
 $respuesta->nombre=$nombre;
 if($resultado){

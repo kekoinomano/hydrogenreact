@@ -20,14 +20,13 @@ const Login = () => {
   const onSubmit = async (e) => {
     let body = JSON.stringify(formData);
     alert(body);
-    Registrar(body);
-    /* axios
+    //Registrar(body);
+    e.preventDefault();
+    await axios
       .post(`${Constantes.RUTA_API}/guardar_usuario.php`, body)
       .then(function (response) {
-        if (response.data !== 'empty') {
-          alert(JSON.stringify(response));
-        }
-      }); */
+          alert(JSON.stringify(response.data.exito));
+      });
   };
 
   return (
@@ -45,7 +44,7 @@ const Login = () => {
             placeholder='Nombre'
             type='text'
             id='nombre'
-            name='name'
+            name='username'
             onChange={(e) => onChange(e)}
             className='input'
           />
