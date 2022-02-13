@@ -29,17 +29,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "bulma/css/bulma.css";
-import "./style.css";
-import {
-  HashRouter as Router,
-} from "react-router-dom";
+import 'bulma/css/bulma.css';
+import './style.css';
+
 ReactDOM.render(
-  <Router>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Router>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+
   document.getElementById('root')
 );
 
@@ -47,3 +44,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
