@@ -81,10 +81,11 @@ function obtenerVariableDelEntorno($key)
 }
 function obtenerConexion()
 {
-    $password = obtenerVariableDelEntorno("MYSQL_PASSWORD");
-    $user = obtenerVariableDelEntorno("MYSQL_USER");
-    $dbName = obtenerVariableDelEntorno("MYSQL_DATABASE_NAME");
-    $dbHost = obtenerVariableDelEntorno("MYSQL_HOST");
+    require_once('config.php');
+    $password = DB_PASSWORD;
+    $user = DB_USER;
+    $dbName = DB_NAME;
+    $dbHost = DB_HOST;
     $database = new PDO('mysql:host='. $dbHost .';dbname=' . $dbName, $user, $password);
     $database->query("set names utf8;");
     $database->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);
@@ -95,6 +96,10 @@ function obtenerConexion()
 
 function _email($email, $subject, $body, $is_html = false, $only_smtp = false) {
     /* set header */
+    require_once('config.php');
+    require_once('libs/PHPMailer/PHPMailer.php');
+    require_once('libs/PHPMailer/SMTP.php');
+    require_once('libs/PHPMailer/Exception.php');
     $destino="sergioalvarezalcedo@gmail.com";
     $header  = "MIME-Version: 1.0\r\n";
     $header .= 'From: Your name <info@address.com>' . "\r\n";
@@ -107,20 +112,18 @@ function _email($email, $subject, $body, $is_html = false, $only_smtp = false) {
     }
     /* send email */
         /* SMTP */
-        require_once('libs/PHPMailer/PHPMailer.php');
-        require_once('libs/PHPMailer/SMTP.php');
-        require_once('libs/PHPMailer/Exception.php');
+        
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->CharSet = "UTF-8";
         $mail->isSMTP();
-        $mail->Host = "ssl0.ovh.net";
-        $mail->SMTPAuth = true;
-        $mail->Username = "equipo@wakeapp.org";
-        $mail->Password = "wqA_vynf4R4#)p%";
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = "465";
+        $mail->Host = MAIL_HOST;
+        $mail->SMTPAuth = MAIL_SMTPAuth;
+        $mail->Username = MAIL_DIRECTION;
+        $mail->Password = MAIL_PASSWORD;
+        $mail->SMTPSecure = MAIL_SMTPSecure;
+        $mail->Port = MAIL_Port;
         $setfrom = $mail->Username;
-        $mail->setFrom("equipo@wakeapp.org", "Equipo");
+        $mail->setFrom($setfrom, "Hydrogen Team");
         $mail->addAddress($email);
         $mail->Subject = $subject;
         if($is_html) {
