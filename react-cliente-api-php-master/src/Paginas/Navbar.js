@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Constantes from '../Constantes';
+import Login from './Login';
 
 const Navbar = () => {
   const [logged, setLog] = useState(false);
-
+  
+  
+  useEffect(()=>{
+    isLogged();
+}, [])
+  
   return (
+
     <header className='site-header'>
       <div className='wrapper site-header__wrapper'>
         <Link to='/' className='brand'>
@@ -34,14 +43,28 @@ const Navbar = () => {
                   color: 'white',
                 }}
               >
-                {logged ? 'Log Out' : 'Log in'}
+                Sign Up
               </Link>
             </li>
           </ul>
         </nav>
       </div>
+      {logged ? <div><div className="login" onClick={() => setLog(logged)}><Login/></div><div className='popUp' onClick={() => setLog(!logged)}></div></div>: ''}
     </header>
+    
   );
 };
+const isLogged = async () => {
+
+  await axios
+    .get(`${Constantes.RUTA_API}/islogged.php`)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data.token));
+        if(response.data.exito){
+          //console.log("Hurra");
+        }
+    });
+};
+
 
 export default Navbar;

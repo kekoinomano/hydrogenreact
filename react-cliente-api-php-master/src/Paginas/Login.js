@@ -11,29 +11,25 @@ const Login = () => {
     password: '',
     password2: '',
   });
-  const elerror=useState("");
+  const [error ,setError ] = useState("");
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const onSubmit = async (e) => {
     let body = JSON.stringify(formData);
-    alert(body);
     //Registrar(body);
     e.preventDefault();
     await axios
       .post(`${Constantes.RUTA_API}/guardar_usuario.php`, body)
       .then(function (response) {
-          alert(JSON.stringify(response.data.error));
-          elerror= response.data.error;
+          console.log(JSON.stringify(response.data.error));
+          if(response.data.exito){
+
+          }
+          setError(response.data.error);
       });
-  };
-  const Diverror = ({elerror}) => {
-    return (
-    <div>{elerror}</div>
-    );
   };
 
   return (
@@ -52,6 +48,7 @@ const Login = () => {
             type='text'
             id='nombre'
             name='username'
+            autoComplete='on'
             onChange={(e) => onChange(e)}
             className='input'
           />
@@ -66,6 +63,7 @@ const Login = () => {
             type='text'
             id='email'
             name='email'
+            autoComplete='on'
             onChange={(e) => onChange(e)}
             className='input'
           />
@@ -80,6 +78,7 @@ const Login = () => {
             type='password'
             id='password'
             name='password'
+            autoComplete='on'
             onChange={(e) => onChange(e)}
             className='input'
           />
@@ -94,11 +93,12 @@ const Login = () => {
             type='password'
             id='password2'
             name='password2'
+            autoComplete='on'
             onChange={(e) => onChange(e)}
             className='input'
           />
         </div>
-        <Diverror />
+        <Diverror error={error}/>
 
         <input
           type='submit'
@@ -111,6 +111,11 @@ const Login = () => {
   );
   
   
+};
+const Diverror = ({error}) => {
+  return (
+  <div>{error}</div>
+  );
 };
 
 export default Login;

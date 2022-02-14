@@ -1,12 +1,8 @@
-import Nav from './Nav';
-import AgregarVideojuego from './AgregarVideojuego';
-import VerVideojuegos from './VerVideojuegos';
-import EditarVideojuego from './EditarVideojuego';
-import Agregarusuario from './register';
+
 import Hola from './CheckoutForm';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Fragment } from 'react';
+//import { Fragment } from 'react';
 import Home from './Paginas/Home';
 import Noticias from './Paginas/Noticias';
 import Login from './Paginas/Login';
