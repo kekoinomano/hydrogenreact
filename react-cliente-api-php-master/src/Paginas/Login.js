@@ -26,6 +26,7 @@ const Login = (props) => {
   const f2 = useRef();
   const f3 = useRef();
   const laview = (vista, f) => {
+    console.log(f.current);
     f.current.reset();
     setView(vista);
   };
@@ -51,6 +52,7 @@ const Login = (props) => {
           console.log(JSON.stringify(response.data));
           if(response.data.exito){
             setError("Exito");
+            localStorage.setItem("user_id", response.data.user_id);
             eval(response.data.callback);
           }else{
             setError(response.data.error);
@@ -69,6 +71,7 @@ const Login = (props) => {
           console.log(JSON.stringify(response.data));
           if(response.data.exito){
             setError("Exito");
+            localStorage.setItem("user_id", response.data.user_id);
             eval(response.data.callback);
             
           }else{

@@ -13,7 +13,7 @@ const Navbar = () => {
 }, [])
   
   return (
-
+    <div className='callate'>
     <header className='site-header'>
       <div className='wrapper site-header__wrapper'>
         <Link to='/' className='brand'>
@@ -51,18 +51,16 @@ const Navbar = () => {
       </div>
       <Login trigger={logged} setLog={setLog}></Login>
     </header>
+    </div>
     
   );
 };
 const isLogged = async () => {
-
   await axios
-    .get(`${Constantes.RUTA_API}/islogged.php`)
+    .get(`${Constantes.RUTA_API}/islogged.php?id=${localStorage.getItem("user_id")}`)
     .then(function (response) {
-        console.log(JSON.stringify(response.data.token));
-        if(response.data.exito){
-          //console.log("Hurra");
-        }
+        console.log(JSON.stringify(response.data));
+
     });
 };
 
