@@ -42,6 +42,7 @@ const Login = (props) => {
           console.log(JSON.stringify(response.data));
           if(response.data.exito){
             setError("Exito");
+            eval(response.data.callback);
           }else{
             setError(response.data.error);
           }
@@ -58,7 +59,8 @@ const Login = (props) => {
           console.log(JSON.stringify(response.data));
           if(response.data.exito){
             setError("Exito");
-            console.log(response.data.contra);
+            eval(response.data.callback);
+            
           }else{
             setError(response.data.error);
           }
@@ -132,6 +134,7 @@ const Login = (props) => {
               name='password'
               onChange={(e) => onChange(e)}
               className='input'
+              autoComplete='on'
             />
           </div>
           <div className='form-group'>
@@ -146,6 +149,7 @@ const Login = (props) => {
               name='password2'
               onChange={(e) => onChange(e)}
               className='input'
+              autoComplete='on'
             />
           </div>
           <Diverror error={error}/>

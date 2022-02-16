@@ -13,7 +13,7 @@ import Reset_password from './Paginas/Reset_password';
 const App = () => {
   return (
     <div>
-      <Router basename=''>
+      <Router>
         <Navbar />
         <div className='espacioNav'>
           <Switch>
@@ -33,7 +33,7 @@ const App = () => {
             <Route exact path='/Noticias' component={Noticias} />
             <Route exact path='/Login' component={Login} />
             <Route exact path='/Comercio' component={Comercio} />
-            <Route path='/reset_password/:token' component={Reset_password} />
+           <Route path='/reset_password/:token' component={Reset_password} />
             <Route component={Hola} exact path='/pagar' />
           </Switch>
         </div>

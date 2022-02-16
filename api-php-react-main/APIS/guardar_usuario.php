@@ -34,8 +34,8 @@ $db->query(sprintf("INSERT INTO users (username, email, password) VALUES (%s, %s
 $user_id = $db->insert_id;
 _set_cookies($user_id, true);
 
-$sesion_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : "1";
-$sesion_token = isset($_COOKIE['user_token']) ? $_COOKIE['user_token'] : "1234";
+$sesion_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : "";
+$sesion_token = isset($_COOKIE['user_token']) ? $_COOKIE['user_token'] : "";
 
 /*
 Cuando llamo a _set_cookies me guarda $_COOKIE['user_token'] y $_COOKIE['user_id']
