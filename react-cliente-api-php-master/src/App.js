@@ -1,7 +1,7 @@
 
 import Hola from './CheckoutForm';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+//import {browserHistory, Route, Router, Switch} from 'react-router';
 //import { Fragment } from 'react';
 import Home from './Paginas/Home';
 import Noticias from './Paginas/Noticias';

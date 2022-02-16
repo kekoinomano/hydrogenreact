@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
@@ -22,6 +22,14 @@ const Login = (props) => {
 
   const [ view ,setView ] = useState("register");
 
+  const f1 = useRef();
+  const f2 = useRef();
+  const f3 = useRef();
+  const laview = (vista, f) => {
+    f.current.reset();
+    setView(vista);
+  };
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,6 +41,7 @@ const Login = (props) => {
   };
 
   const Register = async (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     let body = JSON.stringify(formData);
     //Registrar(body);
     e.preventDefault();
@@ -49,6 +58,7 @@ const Login = (props) => {
       });
   };
   const Login = async (e) => {
+    setFormData2({ ...formData2, [e.target.name]: e.target.value });
     let body = JSON.stringify(formData2);
     //Registrar(body);
     alert(body);
@@ -67,6 +77,7 @@ const Login = (props) => {
       });
   };
   const Email = async (e) => {
+    setFormData3({ ...formData3, [e.target.name]: e.target.value });
     let body = JSON.stringify(formData3);
     //Registrar(body);
     alert(body);
@@ -92,7 +103,7 @@ const Login = (props) => {
             <div className='login column is-one-third' id='register'>
         <h1 className='is-size-3'>Sign Up</h1>
 
-        <form className='field' onSubmit={(e) => Register(e)}>
+        <form className='field' onSubmit={(e) => Register(e)} ref={f1}>
           <div className='form-group'>
             <label className='label' htmlFor='nombre'>
               Name:
@@ -163,7 +174,7 @@ const Login = (props) => {
           <button className="closeForm" onClick={() => props.setLog(false)}>Close</button>
         </form>
         <div className='form-group'>Already have an account? 
-          <Link to='#' style={{marginLeft: 20}} onClick={() => setView("login")}>Sign In</Link>
+          <button style={{marginLeft: 20}} onClick={() => laview("login", f1)}>Sign In</button>
         </div>
       </div>
           )
@@ -172,7 +183,7 @@ const Login = (props) => {
             <div className='login column is-one-third' id='login'>
         <h1 className='is-size-3'>Sign In</h1>
 
-        <form className='field' onSubmit={(e) => Login(e)}>
+        <form className='field' onSubmit={(e) => Login(e)} ref={f2}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
               Email:
@@ -180,10 +191,9 @@ const Login = (props) => {
             <input
               required
               placeholder='Email'
-              type='email'
+              type='text'
               id='email'
               name='email'
-              autoComplete='on'
               onChange={(e) => onChange2(e)}
               className='input'
             />
@@ -198,7 +208,6 @@ const Login = (props) => {
               type='password'
               id='password'
               name='password'
-              autoComplete='on'
               onChange={(e) => onChange2(e)}
               className='input'
             />
@@ -214,10 +223,10 @@ const Login = (props) => {
           <button className="closeForm" onClick={() => {props.setLog(false);setView("register")}}>Close</button>
         </form>
         <div className='form-group'>Forfot your password? 
-          <Link to='#' style={{marginLeft: 20}} onClick={() => setView("reset_password")}>Reset password</Link>
+          <button style={{marginLeft: 20}} onClick={() => laview("reset_password", f2)}>Reset password</button>
         </div>
         <div className='form-group'>Don't have an account? 
-          <Link to='#' style={{marginLeft: 20}} onClick={() => setView("register")}>Sign Up</Link>
+          <button style={{marginLeft: 20}} onClick={() => laview("register", f2)}>Sign Up</button>
         </div>
         
       </div>
@@ -230,14 +239,14 @@ const Login = (props) => {
       <div className='login column is-one-third'>
         <h1 className='is-size-3'>Insert Email</h1>
 
-        <form className='field' onSubmit={(e) => Email(e)}>
+        <form className='field' onSubmit={(e) => Email(e)} ref={f3}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
-              Email:
+              Email or Username:
             </label>
             <input
               required
-              placeholder='Email'
+              placeholder='Email or Username'
               type='email'
               id='email'
               name='email'
@@ -254,7 +263,7 @@ const Login = (props) => {
             value='Reset password'
             style={{ marginTop: 20}}
           />
-          <button className="closeForm" onClick={() => {props.setLog(false);setView("register")}}>Close</button>
+          <button className="closeForm" onClick={() => {props.setLog(false);laview("register", f3)}}>Close</button>
         </form>
       </div>
           )
@@ -266,7 +275,6 @@ const Login = (props) => {
       })()}
       
 
-      {/*--------------------------------------------------------------------------------------*/}
 
       
     </div>
