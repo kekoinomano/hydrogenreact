@@ -1,5 +1,5 @@
 <?php
-include "./libs/stripe-php-master/init.php";
+include "../libs/stripe-php-master/init.php";
 //require 'vendor/autoload.php';
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.

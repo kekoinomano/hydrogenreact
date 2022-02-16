@@ -26,6 +26,7 @@ También tengo canal de YouTube: https://www.youtube.com/channel/UCroP4BTWjfM0Ck
 ------------------------------------------------------------------------------------------------
 */
 const Constantes = {
-  RUTA_API: 'http://localhost/phpreact/api-php-react-main',
+  /*RUTA_API: 'http://localhost/phpreact/api-php-react-main/APIS'*/
+  RUTA_API: 'https://hydrogen.wakeapp.org/APIS'
 };
 export default Constantes;

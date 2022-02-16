@@ -31,12 +31,12 @@ const Navbar = () => {
               <Link to='/Comercio'>Comercio</Link>
             </li>
             <li className='nav__item'>
-              <p onClick={() => setLog(!logged)}>About=???</p>
+              <p>About</p>
             </li>
 
             <li className='nav__item' style={{ marginLeft: 100 }}>
-              <Link
-                to='/Login'
+              <Link to ='#'
+              onClick={() => setLog(!logged)}
                 style={{
                   backgroundColor: 'black',
                   padding: '15px 30px 15px 30px',
@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
         </nav>
       </div>
-      {logged ? <div><div className="login" onClick={() => setLog(logged)}><Login/></div><div className='popUp' onClick={() => setLog(!logged)}></div></div>: ''}
+      <Login trigger={logged} setLog={setLog}></Login>
     </header>
     
   );

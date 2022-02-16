@@ -1,8 +1,7 @@
 <?php
 
-include_once "cors.php";
-
-include_once "funciones.php";
+include_once "../cors.php";
+include_once "../funciones.php";
 
 $respuesta=new stdClass();
 

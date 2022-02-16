@@ -1,8 +1,8 @@
 <?php
 
 
-include_once "cors.php";
-include_once "funciones.php";
+include_once "../cors.php";
+include_once "../funciones.php";
 
 
 $usuario = json_decode(file_get_contents("php://input"));
@@ -34,6 +34,9 @@ $db->query(sprintf("INSERT INTO users (username, email, password) VALUES (%s, %s
 $user_id = $db->insert_id;
 _set_cookies($user_id, true);
 
+$sesion_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : "1";
+$sesion_token = isset($_COOKIE['user_token']) ? $_COOKIE['user_token'] : "1234";
+
 /*
 Cuando llamo a _set_cookies me guarda $_COOKIE['user_token'] y $_COOKIE['user_id']
 Al recargar la página estaría disponible, pero como esto es localhost no funciona
@@ -42,6 +45,5 @@ Una vez tenemos esas cookies podemos hacer una api siempre que el usuario entre 
 si hay coockies-->cogemos la info del usuario
 si el usuario hace log_out-->borramos las cookies
 */ 
-return_json(array('exito' => true, 'token' => [$_COOKIE['user_token'], $_COOKIE['user_token']]));
+return_json(array('exito' => true, 'token' => [$sesion_id, $sesion_token]));
 
-echo json_encode($respuesta);
