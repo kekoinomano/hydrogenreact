@@ -186,11 +186,11 @@ const Login = (props) => {
         <form className='field' onSubmit={(e) => Login(e)} ref={f2}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
-              Email:
+              Email or username:
             </label>
             <input
               required
-              placeholder='Email'
+              placeholder='Email or Username'
               type='text'
               id='email'
               name='email'
@@ -242,11 +242,11 @@ const Login = (props) => {
         <form className='field' onSubmit={(e) => Email(e)} ref={f3}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
-              Email or Username:
+              Email:
             </label>
             <input
               required
-              placeholder='Email or Username'
+              placeholder='Email'
               type='email'
               id='email'
               name='email'
