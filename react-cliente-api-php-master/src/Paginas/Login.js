@@ -20,7 +20,7 @@ const Login = (props) => {
   });
   const [error ,setError ] = useState("");
 
-  const [ view ,setView ] = useState("register");
+  const [ view ,setView ] = useState("login");
 
   const f1 = useRef();
   const f2 = useRef();
@@ -63,7 +63,7 @@ const Login = (props) => {
     setFormData2({ ...formData2, [e.target.name]: e.target.value });
     let body = JSON.stringify(formData2);
     //Registrar(body);
-    alert(body);
+   //alert(body);
     e.preventDefault();
     await axios
       .post(`${Constantes.RUTA_API}/login.php`, body)
@@ -83,7 +83,7 @@ const Login = (props) => {
     setFormData3({ ...formData3, [e.target.name]: e.target.value });
     let body = JSON.stringify(formData3);
     //Registrar(body);
-    alert(body);
+    //lert(body);
     e.preventDefault();
     await axios
       .post(`${Constantes.RUTA_API}/check_email.php`, body)
