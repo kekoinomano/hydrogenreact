@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
 import Login from './Login';
-
+import { LogOut } from '../ConsultasAPI/login';
+import { UserContext } from './UserContext';
 const Navbar = () => {
   const [logged, setLog] = useState(false);
-  const [iflogged, setifLog] = useState(false);
   const [desplegar, setDesplegable] = useState(false);
-  const [user, setUser] = useState('');
+  const { user1, setUser1 } = useContext(UserContext);
 
-  const xxx = () => {
-    alert('user:', user);
-  };
-  useEffect(() => {
-    isLogged(setifLog, setUser);
-    console.log('ejecutado');
-  }, []);
-
-  console.log(user);
   return (
     <div className='callate'>
       <header className='site-header'>
@@ -38,28 +29,23 @@ const Navbar = () => {
                 <Link to='/Comercio'>Comercio</Link>
               </li>
               <li className='nav__item'>
-                <p>About</p>
+                <p>comercio</p>
               </li>
 
-              {iflogged ? (
+              {user1 ? (
                 <li
                   className='nav__item'
                   style={{ marginLeft: 100 }}
                   onMouseOver={() => setDesplegable(true)}
                   onMouseLeave={() => setDesplegable(false)}
                 >
-                  <div
-                    to='#'
-                    className='divButon'
-                    /*  onClick={() => setDesplegable(!desplegar)} */
-                  >
-                    {user}
+                  <div to='#' className='divButon'>
+                    {user1.username}
                     <DesplegbleUser
                       desplegar={desplegar}
-                      user={user}
-                      logout={() => LogOut()}
+                      user1={user1}
+                      logout={() => LogOut(setUser1)}
                     />
-                    {/* onClick={() => LogOut()} */}
                   </div>
                 </li>
               ) : (
@@ -82,11 +68,11 @@ const Navbar = () => {
   );
 };
 
-const DesplegbleUser = ({ desplegar, user, logout }) => {
+const DesplegbleUser = ({ desplegar, user1, logout }) => {
   return desplegar ? (
     <div className='desplegable'>
-      <Link style={{ color: 'white' }} to={`/Perfil/${user}`}>
-        <p>{user}</p>
+      <Link style={{ color: 'white' }} to={`/Perfil/${user1}`}>
+        <p>{user1.username}</p>
       </Link>
       <Link style={{ color: 'white' }} to='/Comercio'>
         <p>algo pondremos</p>
@@ -101,26 +87,6 @@ const DesplegbleUser = ({ desplegar, user, logout }) => {
       <p onClick={logout}>Log out</p>
     </div>
   ) : null;
-};
-
-const isLogged = async (setifLog, setUser) => {
-  await axios
-    .get(
-      `${Constantes.RUTA_API}/islogged.php?id=${localStorage.getItem(
-        'user_id'
-      )}`
-    )
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      if (response.data.exito) {
-        setifLog(true);
-        setUser(response.data.user.username);
-      }
-    });
-};
-const LogOut = () => {
-  localStorage.removeItem('user_id');
-  window.location.href = 'http://localhost:3000';
 };
 
 export default Navbar;
