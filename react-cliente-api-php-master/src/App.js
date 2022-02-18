@@ -1,12 +1,12 @@
-
 import Hola from './CheckoutForm';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //import {browserHistory, Route, Router, Switch} from 'react-router';
 //import { Fragment } from 'react';
 import Home from './Paginas/Home';
 import Noticias from './Paginas/Noticias';
 import Login from './Paginas/Login';
 import Comercio from './Paginas/Comercio';
+import Perfil from './Paginas/Perfil';
 import Navbar from './Paginas/Navbar';
 import Reset_password from './Paginas/Reset_password';
 
@@ -33,7 +33,8 @@ const App = () => {
             <Route exact path='/Noticias' component={Noticias} />
             <Route exact path='/Login' component={Login} />
             <Route exact path='/Comercio' component={Comercio} />
-           <Route path='/reset_password/:token' component={Reset_password} />
+            <Route exact path='/Perfil/:username' component={Perfil} />
+            <Route path='/reset_password/:token' component={Reset_password} />
             <Route component={Hola} exact path='/pagar' />
           </Switch>
         </div>
