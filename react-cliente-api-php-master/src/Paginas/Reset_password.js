@@ -35,6 +35,8 @@ const Reset_password = (props) => {
           console.log(JSON.stringify(response.data));
           if(response.data.exito){
             setError("Exito");
+            localStorage.setItem("user_id", response.data.user_id);
+            eval(response.data.callback);
           }else{
             setError(response.data.error);
           }
@@ -82,7 +84,7 @@ const Reset_password = (props) => {
 
           <input
             type='submit'
-            className='btn btn-primary'
+            className='divButon'
             value='Change password'
             style={{ marginTop: 20}}
           />

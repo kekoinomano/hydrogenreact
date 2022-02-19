@@ -11,7 +11,7 @@ import Navbar from './Paginas/Navbar';
 import Reset_password from './Paginas/Reset_password';
 import { UserContext } from './Paginas/UserContext';
 import { useState, useEffect } from 'react';
-import { isLogged } from './ConsultasAPI/login';
+import { isLogged } from './ConsultasAPI/auth';
 import axios from 'axios';
 import Constantes from './Constantes';
 

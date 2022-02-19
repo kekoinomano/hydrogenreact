@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
 import Login from './Login';
-import { LogOut } from '../ConsultasAPI/login';
+import { LogOut } from '../ConsultasAPI/auth';
 import { UserContext } from './UserContext';
 const Navbar = () => {
   const [logged, setLog] = useState(false);
