@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
-import { Log, Reg, Res, onChange, Diverror } from '../ConsultasAPI/login';
+import { Log, Reg, Res, onChange, Diverror, Loader } from '../ConsultasAPI/login';
 
 const Login = (props) => {
   //Creamos los 3 datos de los formularios
@@ -20,8 +20,9 @@ const Login = (props) => {
     email: ''
   });
 
-  //Variable error y vista
+  //Variable error, vista y cargador
   const [error ,setError ] = useState("");
+  const [loader ,setLoader ] = useState(false);
   const [ view ,setView ] = useState("login");
 
   //Reseteamos los formularios siempre que se cambia de vista
@@ -29,6 +30,7 @@ const Login = (props) => {
   const f2 = useRef();
   const f3 = useRef();
   const laview = (vista, f) => {
+    setError('');
     console.log(f.current);
     f.current.reset();
     setView(vista);
@@ -41,9 +43,9 @@ const Login = (props) => {
           return (
             <div className='login column is-one-third' id='register'>
         <h1 className='is-size-3'>Sign Up</h1>
-        <button className="closeForm" onClick={() => props.setLog(false)}>X</button>
+        <button className="closeForm" onClick={() => {props.setLog(false);setError('')}}>X</button>
 
-        <form className='field' onSubmit={(e) => Reg(e, formData, setFormData, setError)} ref={f1}>
+        <form className='field' onSubmit={(e) => Reg(e, formData, setFormData, setError, setLoader)} ref={f1}>
           <div className='form-group'>
             <label className='label' htmlFor='nombre'>
               Username:
@@ -104,13 +106,17 @@ const Login = (props) => {
             />
           </div>
           <Diverror error={error}/>
-
-          <input
+          {loader ?(
+            <Loader></Loader>
+          ):(
+            <input
             type='submit'
             className='divButon'
             value='Create'
             style={{ marginTop: 20}}
           />
+          )}
+          
         </form>
         <div className='form-group'>Already have an account? 
           <Link to='#' style={{marginLeft: 20}} onClick={() => laview("login", f1)}>Sign In</Link>
@@ -121,9 +127,9 @@ const Login = (props) => {
           return (
             <div className='login column is-one-third' id='login'>
         <h1 className='is-size-3'>Sign In</h1>
-        <button className="closeForm" onClick={() => {props.setLog(false);setView("register")}}>X</button>
+        <button className="closeForm" onClick={() => {props.setLog(false);setView("register");setError('')}}>X</button>
 
-        <form className='field' onSubmit={(e) => Log(e, formData2, setFormData2, setError)} ref={f2}>
+        <form className='field' onSubmit={(e) => Log(e, formData2, setFormData2, setError, setLoader)} ref={f2}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
               Email or username:
@@ -154,12 +160,17 @@ const Login = (props) => {
           </div>
           
           <Diverror error={error}/>
-          <input
+          {loader ? (
+            <Loader></Loader>
+          ) : (
+            <input
             type='submit'
             className='divButon'
             value='Log In'
             style={{ marginTop: 20}}
           />
+          )}
+          
           
         </form>
         <div className='form-group'>Forgot your password? 
@@ -178,9 +189,9 @@ const Login = (props) => {
           return (
       <div className='login column is-one-third'>
         <h1 className='is-size-3'>Insert Email</h1>
-        <button className="closeForm" onClick={() => {props.setLog(false);laview("register", f3)}}>X</button>
+        <button className="closeForm" onClick={() => {props.setLog(false);laview("register", f3);setError('')}}>X</button>
 
-        <form className='field' onSubmit={(e) => Res(e, formData3, setFormData3, setError)} ref={f3}>
+        <form className='field' onSubmit={(e) => Res(e, formData3, setFormData3, setError, setLoader)} ref={f3}>
           <div className='form-group'>
             <label className='label' htmlFor='precio'>
               Email:
@@ -197,13 +208,17 @@ const Login = (props) => {
           </div>
           
           <Diverror error={error}/>
-
-          <input
+          {loader ? (
+              <Loader></Loader>
+            ):(
+              <input
             type='submit'
             className='divButon'
             value='Reset password'
             style={{ marginTop: 20}}
           />
+            )}
+          
           
         </form>
       </div>
