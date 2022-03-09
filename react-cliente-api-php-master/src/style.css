@@ -27,6 +27,12 @@
   font-weight: 400;
   cursor: pointer;
 }
+.simInput{
+  box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
+  background-color: white;
+  border-color: #dbdbdb;
+  border-radius: 4px;  
+}
 /*///////////////////////////////// NAVBAR /////////////////////////////////*/
 
 .brand {
@@ -38,6 +44,7 @@
   position: fixed;
   width: 100%;
   background-color: #ffffff;
+  z-index: 99;
 }
 .site-header a {
   color: black;
@@ -184,6 +191,10 @@
   border-radius: 10px;
   padding: 20px;
 }
+.registration{
+  text-align: center;
+  margin: auto;
+}
 .closeForm {
   border-radius: 20px;
   background: white;
@@ -202,6 +213,66 @@
   background: black;
   color: white;
 }
+.typeDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.typeButton{
+  padding: 20px;
+  width: 40%;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+.typeButton:hover{
+  background: black;
+  color: white;
+}
+.typeButton.active{
+  background: black;
+  color: white;
+}
+.company-info{
+  margin-top: 40px;
+  padding-top: 15px;
+}
+.company-info-text {
+	margin:0 0 1em;
+	color:rgb(0, 0, 0);
+	font-size:1.5em;
+	text-align:center;
+  display:flex;
+  align-items:center;
+}
+.company-info-text:before,.company-info-text:after {
+	content:" ";
+  flex:1 0 0%;
+	height:2px;
+	background:rgba(0,0,0,0.8);
+  margin:0 1.5rem 0 0;
+}
+.company-info-text:after {
+  margin:0 0 0 1.5rem;
+}
+.input50{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.input50 > * {
+  width: 40%;
+}
+.company-info > * > * {
+  margin: 10px 0;
+}
+.company-info > * {
+  margin: 10px 0;
+}
+
 /* ///////////////////////////// PERFIL /////////////////////////////// */
 
 .selectores {

@@ -59,7 +59,7 @@ const Reset_password = (props) => {
               type='password'
               id='password'
               name='password'
-              autoComplete='on'
+              autoComplete='new-password'
               onChange={(e) => onChange(e)}
               className='input'
             />
@@ -74,7 +74,7 @@ const Reset_password = (props) => {
               type='password'
               id='password2'
               name='password2'
-              autoComplete='on'
+              autoComplete='new-password'
               onChange={(e) => onChange(e)}
               className='input'
             />

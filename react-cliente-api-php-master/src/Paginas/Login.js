@@ -127,7 +127,7 @@ const Login = (props) => {
           return (
             <div className='login column is-one-third' id='login'>
         <h1 className='is-size-3'>Sign In</h1>
-        <button className="closeForm" onClick={() => {props.setLog(false);setView("register");setError('')}}>X</button>
+        <button className="closeForm" onClick={() => {props.setLog(false);setError('')}}>X</button>
 
         <form className='field' onSubmit={(e) => Log(e, formData2, setFormData2, setError, setLoader)} ref={f2}>
           <div className='form-group'>
@@ -177,7 +177,7 @@ const Login = (props) => {
           <Link to='#' style={{marginLeft: 20}} onClick={() => laview("reset_password", f2)}>Reset password</Link>
         </div>
         <div className='form-group'>Don't have an account? 
-          <Link to ='#' style={{marginLeft: 20}} onClick={() => laview("register", f2)}>Sign Up</Link>
+          <Link to ='/Register' style={{marginLeft: 20}} onClick={() => {props.setLog(false);setError('')}}>Sign Up</Link>
         </div>
         
       </div>
@@ -189,7 +189,7 @@ const Login = (props) => {
           return (
       <div className='login column is-one-third'>
         <h1 className='is-size-3'>Insert Email</h1>
-        <button className="closeForm" onClick={() => {props.setLog(false);laview("register", f3);setError('')}}>X</button>
+        <button className="closeForm" onClick={() => {props.setLog(false);laview("login", f3);setError('')}}>X</button>
 
         <form className='field' onSubmit={(e) => Res(e, formData3, setFormData3, setError, setLoader)} ref={f3}>
           <div className='form-group'>

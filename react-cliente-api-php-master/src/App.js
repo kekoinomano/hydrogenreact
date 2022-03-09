@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Paginas/Home';
 import Noticias from './Paginas/Noticias';
 import Login from './Paginas/Login';
+import Registration from './Paginas/Registration';
 import Comercio from './Paginas/Comercio';
 import Perfil from './Paginas/Perfil';
 import Navbar from './Paginas/Navbar';
@@ -31,22 +32,10 @@ const App = () => {
           <Navbar />
           <div className='espacioNav'>
             <Switch>
-              {/* <Route exact path='/usuarios/agregar'>
-              <Agregarusuario></Agregarusuario>
-            </Route>
-            <Route exact path='/videojuegos/agregar'>
-              <AgregarVideojuego></AgregarVideojuego>
-            </Route>
-            <Route exact path='/videojuegos/editar/:id'>
-              <EditarVideojuego></EditarVideojuego>
-            </Route>
-            <Route exact path='/videojuegos/ver'>
-              <VerVideojuegos></VerVideojuegos>
-            </Route> */}
-
               <Route exact path='/' component={Home} />
               <Route exact path='/Noticias' component={Noticias} />
               <Route exact path='/Login' component={Login} />
+              <Route exact path='/Register' component={Registration} />
               <Route exact path='/Comercio' component={Comercio} />
               <Route exact path='/Perfil/:username' component={Perfil} />
               <Route path='/reset_password/:token' component={Reset_password} />

@@ -33,9 +33,11 @@ export const Log = async (e, formData, setFormData, setError, setLoader) => {
 export const Reg = async (e, formData, setFormData, setError, setLoader) => {
   setLoader(true);
   setFormData({ ...formData, [e.target.name]: e.target.value });
+  
+  console.log(formData);
   let body = JSON.stringify(formData);
-  //Registrar(body);
   e.preventDefault();
+  
   await axios
     .post(`${Constantes.RUTA_API}/guardar_usuario.php`, body)
     .then(function (response) {
@@ -50,6 +52,7 @@ export const Reg = async (e, formData, setFormData, setError, setLoader) => {
         setError(response.data.error);
       }
     });
+  
 };
 
 //-----------------------Reset Password-----------------------------

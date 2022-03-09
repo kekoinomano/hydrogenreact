@@ -55,7 +55,7 @@ const Navbar = () => {
                     onClick={() => setLog(!logged)}
                     className='divButon'
                   >
-                    Sign up
+                    Sign In
                   </div>
                 </li>
               )}
@@ -71,7 +71,7 @@ const Navbar = () => {
 const DesplegbleUser = ({ desplegar, user1, logout }) => {
   return desplegar ? (
     <div className='desplegable'>
-      <Link style={{ color: 'white' }} to={`/Perfil/${user1}`}>
+      <Link style={{ color: 'white' }} to={`/Perfil/${user1.username}`}>
         <p>{user1.username}</p>
       </Link>
       <Link style={{ color: 'white' }} to='/Comercio'>
