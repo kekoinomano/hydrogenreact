@@ -1,160 +1,51 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
-import {Reg, onChange, Diverror, Loader } from '../ConsultasAPI/login';
+import { UserContext } from './UserContext';
+import { bank_account } from '../ConsultasAPI/auth';
+import { Diverror, Loader, Reg, onChange } from '../ConsultasAPI/login';
 
-const Registration = () => {
-  //Creamos los 3 datos de los formularios
-  
-  
+const BankAccount = (props) => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
-    type: 'buyer',
-    personal_email:'',
-    company_name:'',
-    company_id:'',
-    phone:'',
-    company_city:'',
-    company_address:'',
-    company_zip:'',
-    company_state:'',
-    company_country:'',
-    personal_email:'',
-    personal_name:'',
-    personal_last_name:'',
-    personal_title:'',
-    dob:'',
-  });
-  const [formData2, setFormData2] = useState({
-    email: '',
-    password: ''
-  });
-  const [formData3, setFormData3] = useState({
-    email: ''
+    name: '',
+    country: '',
+    currency: '',
+    account_number: '',
+    routing_number: '',
   });
 
   //Variable error, vista y cargador
   const [error ,setError ] = useState("");
   const [loader ,setLoader ] = useState(false);
-  const refBuyer = useRef();
-  const refSeller = useRef();
-
-  const laview = (tipo, larefactiva, larefinactiva) => {
-    larefactiva.current.className ="typeButton active";
-    larefinactiva.current.className ="typeButton";
-    setFormData({ ...formData, type: tipo});
-  };
+  const { user1, setUser1 } = useContext(UserContext);
 
   return (
-      
-      <div className='registration column is-one-third' id='register'>
-        <h1 className='is-size-3'>Registration</h1>
-        <label className='label' htmlFor='nombre'>
-              Type
-            </label>
-            <div className='typeDiv'>
-              <button className ='typeButton active' ref={refBuyer} onClick={() => laview("buyer", refBuyer, refSeller)}>Buyer</button>
-              <button className ='typeButton' ref={refSeller} onClick={() => laview("seller", refSeller, refBuyer)}>Seller</button>
-            </div>
-        <form className='field regForm' onSubmit={(e) => Reg(e, formData, setFormData, setError, setLoader)}>
+    <div className='popUp'>
+      <div className='login column is-one-third' id='register'>
+        <h1 className='is-size-3'>Bank Account</h1>
+        <button className="closeForm" onClick={() => {props.setView(false);setError('')}}>X</button>
+        <form className='field' onSubmit={(e) => bank_account(e, user1.stripe_id, formData, setFormData, setError, setLoader)}>
           <div className='form-group'>
-            
-
             <label className='label' htmlFor='nombre'>
-              Username
+              Holder Name:
             </label>
             <input
-              
+              autoFocus
               required
-              placeholder='Username'
+              placeholder='Holder Name'
               type='text'
               id='nombre'
-              name='username'
+              name='name'
               onChange={(e) => onChange(e, formData, setFormData)}
               className='input'
             />
           </div>
-          <div className='form-group'>
-            <label className='label' htmlFor='precio'>
-              Email
+          <label className='label' htmlFor='nombre'>
+              Country:
             </label>
-            <input
-              required
-              placeholder='Email'
-              type='email'
-              id='email'
-              name='email'
-              onChange={(e) => onChange(e, formData, setFormData)}
-              className='input'
-            />
-          </div>
-          <div className='form-group'>
-            <label className='label' htmlFor='calificacion'>
-            Password
-            </label>
-            <input
-              required
-              placeholder='Password'
-              type='password'
-              id='password'
-              name='password'
-              onChange={(e) => onChange(e, formData, setFormData)}
-              className='input'
-              autoComplete='new-password'
-            />
-          </div>
-          <div className='form-group'>
-            <label className='label' htmlFor='calificacion'>
-              Repite Password
-            </label>
-            <input
-              required
-              placeholder='Repeat password'
-              type='password'
-              id='password2'
-              name='password2'
-              onChange={(e) => onChange(e, formData, setFormData)}
-              className='input'
-              autoComplete='new-password'
-            />
-          </div>
-          {(() => {
-            if (formData.type=='seller') {
-              return (
-                <div className='company-info'>
-                  <div className='company-info-text'>Company information</div>
-                  <label className='label' htmlFor='nombre'>
-                    Name
-                  </label>
-                  <input required placeholder='Company Name' type='text' id='nombre' name='company_name' 
-                    onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                  />
-                  <input required placeholder='Company Tax ID (12-3456789)' type='text' id='nombre' name='company_id' 
-                    onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                  />
-                  <label className='label' htmlFor='nombre'>
-                    Address
-                  </label>
-                  <input required placeholder='Street Address' type='text' id='nombre' name='company_address' 
-                    onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                  />
-                  <div className='input50'>
-                    <input required placeholder='City' type='text' id='nombre' name='company_city' 
-                      onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                    />
-                    <input required placeholder='State' type='text' id='nombre' name='company_state' 
-                      onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                    />
-                  </div>
-                  <div className='input50'>
-                    <input required placeholder='Zip Code' type='text' id='nombre' name='company_zip' 
-                      onChange={(e) => onChange(e, formData, setFormData)} className='input'
-                    />
-                    <select className='simInput' id="country" name="company_country" defaultValue={'DEFAULT'} onChange={(e) => onChange(e, formData, setFormData)}>
+          <div className='input50'>
+                    <select className='simInput' id="country" name="country" defaultValue={'DEFAULT'} onChange={(e) => onChange(e, formData, setFormData)}>
                       <option disabled value='DEFAULT'>Country</option>
                       <option value="AF">Afghanistan</option>
                       <option value="AX">Aland Islands</option>
@@ -409,65 +300,42 @@ const Registration = () => {
                       <option value="ZM">Zambia</option>
                       <option value="ZW">Zimbabwe</option>
                     </select>
+                    <select className='simInput' id="currency" name="currency" onChange={(e) => onChange(e, formData, setFormData)}>
+                      <option value="usd">Dollar</option>
+                      <option value="eur">Eur</option>
+                    </select>
                     
                   </div>
-
+                  <div className='form-group'>
                   <label className='label' htmlFor='nombre'>
-                    Email
-                  </label>
-                  <input
-                    required
-                    placeholder='Email'
-                    type='email'
-                    id='email'
-                    name='personal_email'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                  <input type="tel" className='input' id="phone" name="phone" placeholder="Phone number" required onChange={(e) => onChange(e, formData, setFormData)}></input>
+              Number of account:
+            </label>
+            <input
+              autoFocus
+              required
+              placeholder='Number of account'
+              type='text'
+              id='nombre'
+              name='account_number'
+              onChange={(e) => onChange(e, formData, setFormData)}
+              className='input'
+            />
+                  </div>
+                  <div className='form-group'>
                   <label className='label' htmlFor='nombre'>
-                    Personal information
-                  </label>
-                  <input
-                    required
-                    placeholder='Name'
-                    type='text'
-                    id='personal_name'
-                    name='personal_name'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                  <input
-                    required
-                    placeholder='Last Name'
-                    type='text'
-                    id='personal_last_name'
-                    name='personal_last_name'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                  <input
-                    required
-                    placeholder='Day of Birthday'
-                    type='date'
-                    id='dob'
-                    name='dob'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                  <input
-                    required
-                    placeholder='Title in company'
-                    type='text'
-                    id='personal_title'
-                    name='personal_title'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                </div>
-              )
-              }
-          })()}
+              Routing number:
+            </label>
+            <input
+              autoFocus
+              placeholder='Routing number (not always neccesary)'
+              type='text'
+              id='nombre'
+              name='routing_number'
+              onChange={(e) => onChange(e, formData, setFormData)}
+              className='input'
+            />
+                  </div>
+                  
           <Diverror error={error}/>
           {loader ?(
             <Loader></Loader>
@@ -481,14 +349,16 @@ const Registration = () => {
           )}
           
         </form>
-        <div className='form-group'>Already have an account? 
-          <Link to='#' style={{marginLeft: 20}} >Sign In</Link>
-        </div>
+        
       </div>
+
+
+    
+    </div>
     );
   
   
 };
 
 
-export default Registration;
+export default BankAccount;

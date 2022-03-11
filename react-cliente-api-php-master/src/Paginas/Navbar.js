@@ -10,6 +10,10 @@ const Navbar = () => {
   const [desplegar, setDesplegable] = useState(false);
   const { user1, setUser1 } = useContext(UserContext);
 
+  useEffect(() => {
+    alert(user1.type);
+  }, []);
+
   return (
     <div className='callate'>
       <header className='site-header'>
