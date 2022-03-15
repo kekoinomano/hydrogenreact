@@ -4,12 +4,16 @@ import { isReady } from '../ConsultasAPI/auth';
 import { UserContext } from './UserContext';
 import Verificar from './Verificar';
 import BankAccount from './BankAccount';
+import VerificationFile from './VerificationFile';
+import Card from './Card';
 
-const Perfil = () => {
+const Perfil = (props) => {
   const [ view ,setView ] = useState(false);
   const [seller, setSeller] = useState(false);
   const [haveload, setHaveLoad] = useState(false);
   const [account, setAccount] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [card, setCard] = useState(false);
   const [verified, setVerified] = useState(false);
   const [file, setFile] = useState(false);
   const { user1, setUser1 } = useContext(UserContext);
@@ -23,17 +27,19 @@ const Perfil = () => {
     }
   }, []);
 */
+
 if(user1 && !haveload){
   setHaveLoad(true);
   console.log(user1);
-  if(user1.type=="seller"){
-    setSeller(true);
-    isReady(user1.stripe_id, setAccount, setFile);
-    //alert(account);
-  }
   if (user1.verified=="1") {
     setVerified(true);
   }
+  if(user1.type=="seller"){
+    setSeller(true);
+    isReady(user1.stripe_id, setAccount, setFile, setReady);
+    //alert(account);
+  }
+  
   
 }
 
@@ -59,7 +65,12 @@ if(user1 && !haveload){
         }
         else if (view=='file') {
           return (
-            <Verificar setView={setView}></Verificar>
+            <VerificationFile setView={setView}></VerificationFile>
+          )
+        }
+        else if (view=='card') {
+          return (
+            <Card setView={setView} id={user1.stripe_id}></Card>
           )
         }
       })()}
@@ -75,13 +86,20 @@ if(user1 && !haveload){
       </div>
       )}
       
-      {account ? (
+      {!account ? (
         <div>
         <button  onClick={() => {setView("account")}}>Formulario de cuenta de banco</button>
       </div>
       ) : ''}
-      {file ? (
-        <div>Formulario pa subir un archivo </div>
+      {!file ? (
+        <div>
+        <button  onClick={() => {setView("file")}}>Formulario pa subir un archivo </button>
+        </div>
+      ) : ''}
+      {ready ? (
+        <div>
+        <button  onClick={() => {setView("card")}}>Pay </button>
+        </div>
       ) : ''}
       
     </div>

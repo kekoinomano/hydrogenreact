@@ -11,10 +11,10 @@ const Navbar = () => {
   const { user1, setUser1 } = useContext(UserContext);
 
   useEffect(() => {
-    alert(user1.type);
-  }, []);
+    console.log(user1.type);
+  }, [user1.type]);
 
-  return (
+  return ( 
     <div className='callate'>
       <header className='site-header'>
         <div className='wrapper site-header__wrapper'>

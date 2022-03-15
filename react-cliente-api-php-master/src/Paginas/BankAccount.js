@@ -10,7 +10,7 @@ const BankAccount = (props) => {
   const [formData, setFormData] = useState({
     name: '',
     country: '',
-    currency: '',
+    currency: 'usd',
     account_number: '',
     routing_number: '',
   });
@@ -301,7 +301,7 @@ const BankAccount = (props) => {
                       <option value="ZW">Zimbabwe</option>
                     </select>
                     <select className='simInput' id="currency" name="currency" onChange={(e) => onChange(e, formData, setFormData)}>
-                      <option value="usd">Dollar</option>
+                      <option value="usd">USD</option>
                       <option value="eur">Eur</option>
                     </select>
                     

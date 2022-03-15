@@ -28,7 +28,7 @@ export const LogOut = (setUser1) => {
 };
 
 
-export const isReady = async (stripe_id, setAccount, setFile) => {
+export const isReady = async (stripe_id, setAccount, setFile, setReady) => {
 
   await axios
     .get(
@@ -37,12 +37,9 @@ export const isReady = async (stripe_id, setAccount, setFile) => {
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       if (response.data.exito) {
-        if(response.data.cuenta){
-          setAccount(true);
-        }
-        if(response.data.file){
-          setFile(true);
-        }
+        setAccount(response.data.cuenta);
+        setFile(response.data.file);
+        setReady(response.data.ready);
       }
     });
 };
@@ -82,6 +79,31 @@ export const bank_account = async (e, stripe_id, formData, setFormData, setError
       }else{
         setLoader(false);
         setError(response.data.error);
+        console.log(response.data.errore)
+      }
+    });
+  
+};
+
+export const verification_file = async (e, stripe_id, formData, setFormData, setError, setLoader) => {
+  setLoader(true);
+  var form_data = new FormData();                  // Creating object of FormData class
+  form_data.append("file", formData.fileToUpload);
+  console.log(formData);
+  e.preventDefault();
+  
+  await axios
+    .post(`${Constantes.RUTA_API}/guardar_verificacion.php?id=${stripe_id}`, form_data)
+    .then(function (response) {
+      
+      console.log(JSON.stringify(response.data.errore));
+      if(response.data.exito){
+        setError("Verification file save succesfully");
+        setLoader(false);
+      }else{
+        setLoader(false);
+        setError(response.data.error);
+        console.log(response.data.errore)
       }
     });
   

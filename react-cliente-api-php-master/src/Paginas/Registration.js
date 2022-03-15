@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Constantes from '../Constantes';
 import {Reg, onChange, Diverror, Loader } from '../ConsultasAPI/login';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const Registration = () => {
   //Creamos los 3 datos de los formularios
-  
+
+
   
   const [formData, setFormData] = useState({
     username: '',
@@ -14,7 +17,6 @@ const Registration = () => {
     password: '',
     password2: '',
     type: 'buyer',
-    personal_email:'',
     company_name:'',
     company_id:'',
     phone:'',
@@ -23,7 +25,6 @@ const Registration = () => {
     company_zip:'',
     company_state:'',
     company_country:'',
-    personal_email:'',
     personal_name:'',
     personal_last_name:'',
     personal_title:'',
@@ -47,6 +48,10 @@ const Registration = () => {
     larefactiva.current.className ="typeButton active";
     larefinactiva.current.className ="typeButton";
     setFormData({ ...formData, type: tipo});
+  };
+  const cambiarTel = (number) => {
+    setFormData({ ...formData, phone: number});
+    console.log(formData);
   };
 
   return (
@@ -413,18 +418,10 @@ const Registration = () => {
                   </div>
 
                   <label className='label' htmlFor='nombre'>
-                    Email
+                    Company Phone Number
                   </label>
-                  <input
-                    required
-                    placeholder='Email'
-                    type='email'
-                    id='email'
-                    name='personal_email'
-                    onChange={(e) => onChange(e, formData, setFormData)}
-                    className='input'
-                  />
-                  <input type="tel" className='input' id="phone" name="phone" placeholder="Phone number" required onChange={(e) => onChange(e, formData, setFormData)}></input>
+                  
+                  <PhoneInput placeholder='Phone Number' defaultCountry="US"  onChange={(e) => {cambiarTel(e)}}/>
                   <label className='label' htmlFor='nombre'>
                     Personal information
                   </label>

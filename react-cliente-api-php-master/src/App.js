@@ -37,7 +37,7 @@ const App = () => {
               <Route exact path='/Login' component={Login} />
               <Route exact path='/Register' component={Registration} />
               <Route exact path='/Comercio' component={Comercio} />
-              <Route exact path='/Perfil/:username' component={Perfil} />
+              <Route exact path='/Perfil/:username' render={(props) => <Perfil {...props} userr={user1} />} />
               <Route path='/reset_password/:token' component={Reset_password} />
               <Route component={Hola} exact path='/pagar' />
             </Switch>
